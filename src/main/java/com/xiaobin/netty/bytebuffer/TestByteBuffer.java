@@ -16,7 +16,7 @@ import java.nio.channels.FileChannel;
 @Slf4j
 public class TestByteBuffer {
     public static void main(String[] args) {
-        //FileChannel
+        //TestFileChannelTransferTo
         //1 输入流/输出流
         //2 RandomAccessFile
         try (FileChannel channel = new FileInputStream("data.txt").getChannel()) {
