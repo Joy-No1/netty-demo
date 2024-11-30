@@ -1,9 +1,9 @@
-package com.xiaobin.netty.c1;
+package com.xiaobin.netty.bytebuffer;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 
-import static com.xiaobin.netty.c1.ByteBufferUtil.debugAll;
+import static com.xiaobin.netty.bytebuffer.ByteBufferUtil.debugAll;
 
 /**
  * @author Joy

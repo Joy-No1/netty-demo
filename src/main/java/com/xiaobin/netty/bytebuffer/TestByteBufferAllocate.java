@@ -1,4 +1,4 @@
-package com.xiaobin.netty.c1;
+package com.xiaobin.netty.bytebuffer;
 
 import java.nio.ByteBuffer;
 

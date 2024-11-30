@@ -1,10 +1,10 @@
-package com.xiaobin.netty.c1;
+package com.xiaobin.netty.bytebuffer;
 
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
-import static com.xiaobin.netty.c1.ByteBufferUtil.debugAll;
+import static com.xiaobin.netty.bytebuffer.ByteBufferUtil.debugAll;
 
 /**
  * @author Joy

@@ -1,9 +1,8 @@
-package com.xiaobin.netty.c1;
+package com.xiaobin.netty.bytebuffer;
 
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
