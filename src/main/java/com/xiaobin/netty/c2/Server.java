@@ -5,11 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
-import java.nio.channels.ServerSocketChannel;
-import java.nio.channels.SocketChannel;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.nio.channels.*;
+import java.util.*;
 
 import static com.xiaobin.netty.c1.bytebuffer.ByteBufferUtil.debugRead;
 
@@ -23,42 +20,58 @@ import static com.xiaobin.netty.c1.bytebuffer.ByteBufferUtil.debugRead;
 @Slf4j
 public class Server {
     public static void main(String[] args) throws IOException {
-        //0. ByteBuffer
-        ByteBuffer buffer = ByteBuffer.allocate(10);
+        //1. 创建Selector 管理多个channel
+        Selector selector = Selector.open();
 
-        //1. 创建服务器
         ServerSocketChannel ssc = ServerSocketChannel.open();
+        ssc.configureBlocking(false);
 
-        ssc.configureBlocking(false);//切换为非阻塞模式
+        //2. 建立selector 和channel的联系 (注册)
+        //selectionKey 事件发生后,通过它可以得到事件和channel事件
+        SelectionKey sscKey = ssc.register(selector, 0, null);
+        log.debug("register key:{}", sscKey);
+        //只关注accept事件 0表示不关注任何事件
+        sscKey.interestOps(SelectionKey.OP_ACCEPT);
 
-        //2. 绑定监听端口
         ssc.bind(new InetSocketAddress(8087));
-
-        //3. accept 建立与客户端的连接 SocketChannel用来与客户端进行通信
-        List<SocketChannel> channels = new ArrayList<>();
         while (true) {
-//            log.debug("connecting.....");
-            SocketChannel sc = ssc.accept(); //阻塞方法,线程停止运行  ssc.configureBlocking(false);//切换为非阻塞模式
-            if (Objects.nonNull(sc)) {
-                log.debug("connected.....{}", sc);
-                channels.add(sc);
-            }
-            for (SocketChannel channel : channels) {
+            //3. select方法 没有事件 线程就阻塞,有事件才会恢复运行
+            selector.select();
 
-                //4. 接收客户端发送的数据
-//                log.debug("before.....{}", channels);
+            //4. 处理事件,selectedKeys 内部包含了所有发生的事件
+            Set<SelectionKey> selectionKeys = selector.selectedKeys();
+            Iterator<SelectionKey> iterator = selectionKeys.iterator();
+            while (iterator.hasNext()) {
+                SelectionKey key = iterator.next();
+                //处理key  要从selectedKeys 集合中删除,否则下次处理会有问题
+                iterator.remove();
+                log.debug("key:{} ", key);
+                //5. 区分事件类型
+                if (key.isAcceptable()) {
+                    ServerSocketChannel channel = (ServerSocketChannel) key.channel();
+                    SocketChannel sc = channel.accept();
+                    sc.configureBlocking(false);
+                    SelectionKey scKey = sc.register(selector, 0, null);
+                    scKey.interestOps(SelectionKey.OP_READ);
+                    log.debug("{}", channel);
+                } else if (key.isReadable()) {
+                    SocketChannel channel = (SocketChannel) key.channel();
+                    try {
+                        ByteBuffer buffer = ByteBuffer.allocate(16);
+                        int read = channel.read(buffer);
+                        if (read==-1){
 
-                int read = channel.read(buffer);//非阻塞 线程仍然会运行 如果没有读到数据 read返回0
-                if (read > 0) {
-                    buffer.flip();
-
-                    debugRead(buffer);
-
-                    buffer.clear();
-                    log.debug("after.....{}", channel);
+                        }else {
+                            buffer.flip();
+                            debugRead(buffer);
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        key.cancel();
+                    }
                 }
+//                key.cancel();
             }
-
         }
     }
 }
