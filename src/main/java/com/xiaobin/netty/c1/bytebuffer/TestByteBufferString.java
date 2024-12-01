@@ -1,9 +1,7 @@
-package com.xiaobin.netty.bytebuffer;
+package com.xiaobin.netty.c1.bytebuffer;
 
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
-
-import static com.xiaobin.netty.bytebuffer.ByteBufferUtil.debugAll;
 
 /**
  * @author Joy
@@ -16,11 +14,11 @@ public class TestByteBufferString {
         //1. 字符串转为ByteBuffer
         ByteBuffer buffer = ByteBuffer.allocate(10);
         buffer.put("hello".getBytes());
-        debugAll(buffer);
+        ByteBufferUtil.debugAll(buffer);
 
         //2. CharSet
         ByteBuffer hello = StandardCharsets.UTF_8.encode("hello");
-        debugAll(hello);
+        ByteBufferUtil.debugAll(hello);
 
         //3. wrap
         ByteBuffer buffer1 = ByteBuffer.wrap("hello".getBytes());

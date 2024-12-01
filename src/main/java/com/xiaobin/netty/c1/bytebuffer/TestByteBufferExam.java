@@ -1,4 +1,4 @@
-package com.xiaobin.netty.bytebuffer;
+package com.xiaobin.netty.c1.bytebuffer;
 
 /**
  * @author Joy

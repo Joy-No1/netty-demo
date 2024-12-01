@@ -1,4 +1,4 @@
-package com.xiaobin.netty.filechannel;
+package com.xiaobin.netty.c1.filechannel;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -14,7 +14,7 @@ public class TestFileChannelTransferTo {
     public static void main(String[] args) {
         try (
                 FileChannel from = new FileInputStream("data.txt").getChannel();
-                FileChannel to = new FileOutputStream("to.txt").getChannel();
+                FileChannel to = new FileOutputStream("to.txt").getChannel()
         ) {
             //效率高 底层会利用操作系统的零拷贝进行优化 2g数据
             long size = from.size();

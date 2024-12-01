@@ -1,10 +1,8 @@
-package com.xiaobin.netty.bytebuffer;
+package com.xiaobin.netty.c1.bytebuffer;
 
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-
-import static com.xiaobin.netty.bytebuffer.ByteBufferUtil.debugAll;
 
 /**
  * @author Joy
@@ -22,9 +20,9 @@ public class TestScatteringReads {
             b1.flip();
             b2.flip();
             b3.flip();
-            debugAll(b1);
-            debugAll(b2);
-            debugAll(b3);
+            ByteBufferUtil.debugAll(b1);
+            ByteBufferUtil.debugAll(b2);
+            ByteBufferUtil.debugAll(b3);
         } catch (Exception e) {
         }
     }

@@ -1,4 +1,4 @@
-package com.xiaobin.netty.filechannel;
+package com.xiaobin.netty.c1.filechannel;
 
 import java.io.IOException;
 import java.nio.file.*;
