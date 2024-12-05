@@ -1,4 +1,4 @@
-package com.xiaobin.netty.c2;
+package com.xiaobin.nio.c2;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -8,7 +8,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.util.*;
 
-import static com.xiaobin.netty.c1.bytebuffer.ByteBufferUtil.debugRead;
+import static com.xiaobin.nio.c1.bytebuffer.ByteBufferUtil.debugRead;
 
 /**
  * @author Joy

@@ -1,4 +1,4 @@
-package com.xiaobin.netty.c3;
+package com.xiaobin.nio.c3;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static com.xiaobin.netty.c1.bytebuffer.ByteBufferUtil.debugAll;
+import static com.xiaobin.nio.c1.bytebuffer.ByteBufferUtil.debugAll;
 
 /**
  * @author Joy

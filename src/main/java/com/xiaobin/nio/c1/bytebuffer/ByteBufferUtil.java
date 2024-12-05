@@ -1,4 +1,4 @@
-package com.xiaobin.netty.c1.bytebuffer;
+package com.xiaobin.nio.c1.bytebuffer;
 
 import io.netty.util.internal.StringUtil;
 

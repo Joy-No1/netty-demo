@@ -1,4 +1,4 @@
-package com.xiaobin.netty.c2;
+package com.xiaobin.nio.c2;
 
 import lombok.extern.slf4j.Slf4j;
 

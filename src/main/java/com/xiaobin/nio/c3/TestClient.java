@@ -1,30 +1,25 @@
-package com.xiaobin.netty.c2;
+package com.xiaobin.nio.c3;
 
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
+import java.nio.charset.Charset;
 
 /**
  * @author Joy
- * @date: 2024/12/1 21:13
- * @description: 客户端
+ * @date: 2024/12/2 22:14
+ * @description: 测试客户端
  * Good Luck!!!
  */
 
 @Slf4j
-public class WriterClient {
+public class TestClient {
     public static void main(String[] args) throws IOException {
         SocketChannel sc = SocketChannel.open();
         sc.connect(new InetSocketAddress("localhost", 8080));
-        int count = 0;
-        while (true) {
-            ByteBuffer buffer = ByteBuffer.allocate(1024 * 1024);
-            count += sc.read(buffer);
-            log.debug("count:{}", count);
-            buffer.clear();
-        }
+        sc.write(Charset.defaultCharset().encode("1234567890abcdef"));
+        System.in.read();
     }
 }

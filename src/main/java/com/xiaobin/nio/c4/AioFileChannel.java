@@ -1,5 +1,6 @@
-package com.xiaobin.netty.c4;
+package com.xiaobin.nio.c4;
 
+import com.xiaobin.nio.c1.bytebuffer.ByteBufferUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -8,8 +9,6 @@ import java.nio.channels.AsynchronousFileChannel;
 import java.nio.channels.CompletionHandler;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-
-import static com.xiaobin.netty.c1.bytebuffer.ByteBufferUtil.debugAll;
 
 /**
  * @author Joy
@@ -30,7 +29,7 @@ public class AioFileChannel {
                 public void completed(Integer result, ByteBuffer attachment) {
                     log.debug("read completed...{}", result);
                     buffer.flip();
-                    debugAll(buffer);
+                    ByteBufferUtil.debugAll(buffer);
                 }
 
                 @Override
